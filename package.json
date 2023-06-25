@@ -6,7 +6,7 @@
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev",
+    "start": "pnpm run dev",
     "rebuild-deps": "electron-builder install-app-deps",
     "electron:init": "umi electron init",
     "electron:dev": "umi dev electron",
