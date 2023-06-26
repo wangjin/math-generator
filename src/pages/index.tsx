@@ -14,11 +14,10 @@ export default () => {
     const [list, setList] = useState<JSX.Element[]>([]);
     const [equation, setEquation] = useState<CheckboxValueType[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const printRef = useRef();
+    const printRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
 
     const handlePrint = useReactToPrint({
-        // @ts-ignore
         content: () => printRef.current,
     });
 
@@ -109,7 +108,8 @@ export default () => {
                             num2 = temp;
                         }
 
-                        list.push(<Col key={`idx-${i}`} className={styles.colSubject} span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
+                        list.push(<Col key={`idx-${i}`} className={styles.colSubject}
+                                       span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
                         if (i % 100 === 99) {
                             list.push(<Divider/>);
                         }
@@ -129,12 +129,9 @@ export default () => {
 
                 </Col>
             </Row>
-            <div ref={printRef}>
-                <Row>
-                    {list.map((item) => item)}
-                </Row>
-            </div>
-
+            <Row ref={printRef}>
+                {list.map((item) => item)}
+            </Row>
         </div>
     );
 }
