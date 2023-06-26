@@ -43,6 +43,7 @@ function createWindow() {
             event.preventDefault()
             hideWindow()
         } else {
+            // @ts-ignore
             mainWindow = undefined
         }
     });
