@@ -63,3 +63,5 @@ ts-gen
 patches/mtime-cache.json
 
 spec/fixtures/logo.png
+/dist_electron
+dist_electron

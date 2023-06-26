@@ -29,5 +29,5 @@
     "umi-plugin-electron-builder": "^4.0.4"
   },
   "name": "electron_builder_app",
-  "version": "0.0.1"
+  "version": "1.0.0"
 }

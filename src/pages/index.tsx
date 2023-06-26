@@ -75,6 +75,7 @@ export default () => {
                         min={1}
                         max={10}
                         defaultValue={1}
+                        // @ts-ignore
                         onChange={(value: number) => {
                             setTotalPage(value);
                         }}/>
@@ -97,7 +98,18 @@ export default () => {
                             list.push(<Col key='idx-time' className={styles.colTitle} span={6}>用时：</Col>);
                             list.push(<Col key='idx-score' className={styles.colTitle} span={6}>得分：</Col>);
                         }
-                        list.push(<Col key={`idx-${i}`} className={styles.colSubject} span={6}>{`${Math.round(Math.random() * range)} ${equation[rand]} ${Math.round(Math.random() * range)} = `}</Col>);
+
+                        let num1 = Math.round(Math.random() * range);
+                        let num2 = Math.round(Math.random() * range);
+                        const equationMark = equation[rand];
+                        // 减法需要判断两个数大小
+                        if (equationMark === '-' && num1 < num2) {
+                            let temp = num1;
+                            num1 = num2;
+                            num2 = temp;
+                        }
+
+                        list.push(<Col key={`idx-${i}`} className={styles.colSubject} span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
                         if (i % 100 === 99) {
                             list.push(<Divider/>);
                         }
