@@ -110,7 +110,9 @@ export default () => {
                         }
 
                         list.push(<Col key={`idx-${i}`} className={styles.colSubject} span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
-                        if (i % 100 === 99) {
+                        
+                        const userAgent = window.navigator.userAgent;
+                        if (i % 100 === 99 && !userAgent.includes('Windows')) {
                             list.push(<Divider/>);
                         }
                     }
