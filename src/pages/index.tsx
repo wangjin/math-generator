@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {Button, Row, Col, Radio, message, Checkbox, InputNumber, Divider} from 'antd';
+import React, { useState, useRef, useEffect } from 'react';
+import { Button, Row, Col, Radio, message, Checkbox, InputNumber, Divider } from 'antd';
 import styles from './index.less';
-import type {RadioChangeEvent} from 'antd';
-import {CheckboxValueType} from "antd/es/checkbox/Group";
-import {useReactToPrint} from 'react-to-print';
+import type { RadioChangeEvent } from 'antd';
+import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { useReactToPrint } from 'react-to-print';
 
 export default () => {
 
@@ -28,12 +28,12 @@ export default () => {
                 <Col className={styles.colJustify} span={6}>
                     <Radio.Group
                         options={[
-                            {label: '10以内', value: 10},
-                            {label: '20以内', value: 20},
-                            {label: '50以内', value: 50},
-                            {label: '100以内', value: 100},
+                            { label: '10以内', value: 10 },
+                            { label: '20以内', value: 20 },
+                            { label: '50以内', value: 50 },
+                            { label: '100以内', value: 100 },
                         ]}
-                        onChange={({target: {value}}: RadioChangeEvent) => {
+                        onChange={({ target: { value } }: RadioChangeEvent) => {
                             console.log('radio4 checked', value);
                             setRange(value);
                         }}
@@ -45,27 +45,27 @@ export default () => {
                 <Col className={styles.colJustify} span={6}>
                     <Radio.Group
                         options={[
-                            {label: '不填空', value: 0},
-                            {label: '填空', value: 1},
+                            { label: '不填空', value: 0 },
+                            { label: '填空', value: 1 },
                         ]}
-                        onChange={({target: {value}}: RadioChangeEvent) => {
+                        onChange={({ target: { value } }: RadioChangeEvent) => {
                             setFill(value);
                         }}
                         value={fill}
                         optionType='button'
-                        buttonStyle='solid'/>
+                        buttonStyle='solid' />
                 </Col>
                 <Col className={styles.colJustify} span={6}>
                     <Checkbox.Group
-                        style={{width: '100%'}}
+                        style={{ width: '100%' }}
                         onChange={(checkedValues: CheckboxValueType[]) => {
                             setEquation(checkedValues);
                         }}
                         options={[
-                            {label: '加法', value: '+'},
-                            {label: '减法', value: '-'},
-                            {label: '乘法', value: '×'},
-                            {label: '除法', value: '÷'},
+                            { label: '加法', value: '+' },
+                            { label: '减法', value: '-' },
+                            { label: '乘法', value: '×' },
+                            { label: '除法', value: '÷' },
                         ]}
                     />
                 </Col>
@@ -77,7 +77,7 @@ export default () => {
                         // @ts-ignore
                         onChange={(value: number) => {
                             setTotalPage(value);
-                        }}/>
+                        }} />
                 </Col>
                 <Col className={styles.colJustify} span={2}><Button type='primary' onClick={() => {
                     const list = [];
@@ -106,12 +106,20 @@ export default () => {
                             let temp = num1;
                             num1 = num2;
                             num2 = temp;
+                        } else if (equationMark === '÷') {
+                            // 除法通过计算乘式来获得算式
+                            num1 = num1 * num2;
+                            // 如果算出被除数是0或超过范围的平方，则重新计算
+                            if (num1 === 0 || num1 >= (range * range)) {
+                                --i;
+                                continue;
+                            }
                         }
 
                         list.push(<Col key={`idx-${i}`} className={styles.colSubject}
-                                       span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
+                            span={6}>{`${num1} ${equationMark} ${num2} = `}</Col>);
                         if (i % 100 === 99) {
-                            list.push(<Divider/>);
+                            list.push(<Divider />);
                         }
                     }
 

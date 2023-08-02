@@ -1,4 +1,4 @@
-import {app, BrowserWindow, protocol} from 'electron';
+import { app, BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import createProtocol from './createProtocol';
 
@@ -6,7 +6,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow: BrowserWindow;
 
 protocol.registerSchemesAsPrivileged([
-    {scheme: 'app', privileges: {secure: true, standard: true}},
+    { scheme: 'app', privileges: { secure: true, standard: true } },
 ]);
 
 let allowQuitting = false;
@@ -31,7 +31,7 @@ function createWindow() {
         height: 1000,
         center: true,
         resizable: false,
-        title: '口算生成器v1.0.0 By Wan9J1n',
+        title: '口算生成器v1.0.1 By Wan9J1n',
         webPreferences: {
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js'),
